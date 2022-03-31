@@ -3,11 +3,11 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 //components
-import Login from "../screens/Login";
-import Forgot from "../screens/Forgot";
-import SignUp from "../screens/SignUp";
+import LoginScreen from "../screens/LoginScreen";
+import ForgotScreen from "../screens/ForgotScreen";
+import SignUpScreen from "../screens/SignUpScreen";
 //constants
-import Colors from "../constants/Colors";         
+import Colors from "../constants/Colors";       
 
 const Stack = createStackNavigator();   
 
@@ -24,9 +24,9 @@ const Navigator = () => {
             fontWeight: "bold",
           },
         }}>
-        <Stack.Screen name='Login' component={Login} />
-        <Stack.Screen name='ForgotPassword' component={Forgot} />
-        <Stack.Screen name='SignUp' component={SignUp} />
+        <Stack.Screen name='Login' component={LoginScreen} />
+        <Stack.Screen name='ForgotPassword' component={ForgotScreen} />
+        <Stack.Screen name='SignUp' component={SignUpScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
