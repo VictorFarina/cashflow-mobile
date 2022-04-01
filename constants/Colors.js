@@ -1,3 +1,5 @@
 export default {
-    CashFlowBlue:'#0063D1'
+    cashFlowBlue:'#0063D1',
+    black:'#21374F',
+    grey:'#898989'
 }

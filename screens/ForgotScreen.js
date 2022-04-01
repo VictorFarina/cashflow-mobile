@@ -1,10 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Forgot = (props) => {
   return (
     <View style={styles.container}>
-      <Text>Forgot</Text>
+
+    <Text>forgot</Text>
+      
+   
     </View>
   );
 };

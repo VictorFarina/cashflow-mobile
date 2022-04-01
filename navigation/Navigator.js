@@ -7,15 +7,16 @@ import LoginScreen from "../screens/LoginScreen";
 import ForgotScreen from "../screens/ForgotScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 //constants
-import Colors from "../constants/Colors";       
+import Colors from "../constants/Colors";
 
-const Stack = createStackNavigator();   
+const Stack = createStackNavigator();
 
 const Navigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
+          headerShown: false,
           headerStyle: {
             backgroundColor: Colors.CashFlowBlue,
           },
