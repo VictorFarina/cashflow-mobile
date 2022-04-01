@@ -6,35 +6,50 @@ import TextInputComponent from "../components /ui/TextInputComponent";
 import ButtonComponent from "../components /ui/ButtonComponent";
 import TextComponent from "../components /ui/TextComponent";
 import LinkComponent from "../components /ui/LinkComponent";
+import LogoComponent from "../components /ui/LogoComponent";
 
 const Login = ({ navigation }) => {
+  //handlers
+  const pressHandler = (route) => {
+    navigation.navigate(route);
+  };
+
+  const changeHandler = (input) => {
+    console.log(input);
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={styles.screen}>
 
-      <TextComponent title={"Welcome"} style={"styles.secondary"} />
+      <View style={styles.logo}>
+              <LogoComponent width={100} height={100} />
+      </View>
       
-      <TextComponent title={"Sign in to continue"} />
 
-      <TextInputComponent placeholder={"Email"} onChange={() => {}} />
+        <TextComponent title={"Welcome"} />
 
-      <TextInputComponent placeholder={"Password"} onChange={() => {}} />
+        <TextComponent title={"Sign in to continue"} />
+   
+
+      <TextInputComponent
+        placeholder={"Email"}
+        onChange={() => changeHandler}
+      />
+
+      <TextInputComponent
+        placeholder={"Password"}
+        onChange={() => changeHandler}
+      />
 
       <LinkComponent
         title='Forgot password?'
-        onPress={() => {
-          navigation.navigate("ForgotPassword");
-        }}
+        onPress={() => pressHandler("ForgotPassword")}
       />
 
       <ButtonComponent title='Login' onPress={() => {}} />
 
+      <LinkComponent title='Sign up' onPress={() => pressHandler("SignUp")} />
 
-      <LinkComponent
-        title='Sign up'
-        onPress={() => {
-          navigation.navigate("ForgotPassword");
-        }}
-      />
     </View>
   );
 };
@@ -42,20 +57,17 @@ const Login = ({ navigation }) => {
 export default Login;
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
 
-  input: {
-    height: 60,
-    margin: 20,
-    borderWidth: 0,
-    padding: 10,
-    borderRadius: 7,
-    width: "80%",
-    backgroundColor: "#e2ebf0",
+  logo: {
+    width:'100%',
+    marginLeft:30
+   
   },
+
 });
