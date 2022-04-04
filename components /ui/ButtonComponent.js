@@ -5,7 +5,7 @@ import Colors from "../../constants/Colors";
 const ButtonComponent = (props) => {
   return (
     <TouchableOpacity style={styles.button} onPress={props.onPress}>
-      <Text>{props.title}</Text>
+      <Text style={styles.title}>{props.title}</Text>
     </TouchableOpacity>
   );
 };
@@ -13,13 +13,18 @@ const ButtonComponent = (props) => {
 export default ButtonComponent;
 
 const styles = StyleSheet.create({
+
   button: {
     alignItems: "center",
-    color:'#fff' ,
-    backgroundColor: Colors.cashFlowBlue,
-    padding: 25,
-    borderRadius:5,
-    width: 300,
-    marginVertical:20 
+    backgroundColor: "#62ACFD",
+    padding: 20,
+    borderRadius: 5,
   },
+
+  title: {
+    fontSize:15,
+    color: "#fff",
+  },
+
+
 });

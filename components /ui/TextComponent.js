@@ -15,14 +15,13 @@ export default TextComponent;
 const styles = StyleSheet.create({
   primary: {
     fontWeight: "500",
-    fontSize: 32,
-    color: Colors.black,
+    fontSize: 25,
+    color: Colors.black
   },
 
   secondary: {
-    fontWeight: "200",
-    fontSize: 22,
-    color: Colors.grey,
+    fontWeight: "500",
+    fontSize: 18,
+    color: Colors.grey
   },
-  
 });
