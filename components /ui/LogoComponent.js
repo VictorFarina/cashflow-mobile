@@ -1,17 +1,15 @@
-import { StyleSheet, Image, View } from "react-native";
-import React from "react";
+import { Image } from "react-native";
 
-const LogoComponent = (props) => {
+const LogoComponent = (props) => {  
   return (
-    <View>
       <Image
-        source={require("../../assets/images/logo.png")}
-        style={{ width: props.width, height: props.height }}
+        style={{ 
+          width: props.width, 
+          height: props.height 
+        }}
+        source={props.logo}
       />
-    </View>
   );
 };
 
 export default LogoComponent;
-
-const styles = StyleSheet.create({});

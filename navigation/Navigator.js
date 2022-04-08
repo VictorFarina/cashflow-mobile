@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -23,8 +23,8 @@ const Navigator = () => {
           headerTintColor: "#fff",
           headerTitleStyle: {
             fontWeight: "bold",
-          },
-        }}>
+          },  
+        }}> 
         <Stack.Screen name='Login' component={LoginScreen} />
         <Stack.Screen name='ForgotPassword' component={ForgotScreen} />
         <Stack.Screen name='SignUp' component={SignUpScreen} />
@@ -35,4 +35,4 @@ const Navigator = () => {
 
 export default Navigator;
 
-const styles = StyleSheet.create({});
+
