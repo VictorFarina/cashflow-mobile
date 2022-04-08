@@ -8,7 +8,7 @@ const ErrorMessageComponent = (props) => {
       style={{
         color: Colors.validationRed,
         position: "absolute",
-        top: "140%%",
+        top: "140%",
         left: "-15%",
       }}>
       {props.message}

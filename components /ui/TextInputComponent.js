@@ -53,7 +53,7 @@ const TextInputComponent = (props) => {
             style={{
               marginTop: 4,
               position: "absolute",
-              right: "15%",
+              right: "20%",
             }}
             name={secureText ? "eye-off" : "eye"}
             size={30}

@@ -8,9 +8,7 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { Link } from "@react-navigation/native";
-
-//the keyboard on android makes the whole screen move up when hittting the TextInputComponent
-//iphone 8 too small in height
+import { useWindowDimensions } from "react-native";
 
 //components
 import TextInputComponent from "../components /ui/TextInputComponent";
@@ -21,14 +19,9 @@ import LogoComponent from "../components /ui/LogoComponent";
 import Colors from "../constants/Colors";
 import logo from "../assets/images/logo.png";
 
+
 const Login = ({ navigation }) => {
-  
-  const [validations, setValidations] = useState({
-    isEmailValid: false,
-    emailIsPressed: false,
-    isPasswordValid: false,
-    passwordIsPressed: false,
-  });
+ const window = useWindowDimensions();
 
   //userinfo----------
   const [email, setEmail] = useState("");
@@ -64,6 +57,12 @@ const Login = ({ navigation }) => {
   //------------------
 
   //Validation-----------
+  const [validations, setValidations] = useState({
+    isEmailValid: false,
+    emailIsPressed: false,
+    isPasswordValid: false,
+    passwordIsPressed: false,
+  });
   useEffect(() => {
     const timer = setTimeout(() => {
       setValidations((prevState) => {
@@ -84,16 +83,17 @@ const Login = ({ navigation }) => {
     !validations.emailIsValid && validations.emailIsPressed;
   let showPasswordErrorMessage =
     !validations.passwordIsValid && validations.passwordIsPressed;
-  //------------------
+  //--------------------------------------------------------------
 
   return (
     <Pressable style={styles.screen} onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <View style={styles.logoContainer}>
+
+        <View style={{...styles.logoContainer, marginTop: window.height < 800 ? 0  : 70,}}>
           <LogoComponent width={70} height={70} logo={logo} />
         </View>
 
-        <View style={styles.titleContainer}>
+        <View style={{...styles.titleContainer, marginBottom: window.height < 800 ? 0 : 30  }}>
           <TextComponent
             color={Colors.black}
             title='Welcome'
@@ -140,7 +140,7 @@ const Login = ({ navigation }) => {
           Forgot password?
         </Link>
 
-        <View style={styles.btnContainer}>
+        <View style={{...styles.btnContainer,marginTop:window.height < 800? 50 : 80}}>
           <ButtonComponent
             width={"100%"}
             backgroundColor={Colors.buttonBlue}
@@ -151,7 +151,7 @@ const Login = ({ navigation }) => {
           />
         </View>
 
-        <View style={styles.signUpTextContainer}>
+        <View style={{...styles.signUpTextContainer,marginBottom: window.height < 800 ? 20 : 40}}>
           <Text>Don't you have and account?</Text>
           <Link style={styles.link} to={{ screen: "SignUp" }}>
             Sign Up
@@ -177,7 +177,9 @@ const Login = ({ navigation }) => {
 
 export default Login;
 
+
 const styles = StyleSheet.create({
+
   screen: {
     flex: 1,
     backgroundColor: "#fff",
@@ -191,13 +193,12 @@ const styles = StyleSheet.create({
 
   logoContainer: {
     width: "100%",
-    marginTop: 70,
     marginBottom: 30,
   },
 
   titleContainer: {
     width: "100%",
-    marginBottom: 30,
+
   },
 
   link: {
@@ -207,14 +208,14 @@ const styles = StyleSheet.create({
   },
 
   btnContainer: {
-    marginTop: 80,
+    
     marginBottom: 20,
   },
 
   signUpTextContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 40,
+    
   },
   footerTextContainer: {
     alignSelf: "center",
