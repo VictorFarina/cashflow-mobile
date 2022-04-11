@@ -10,28 +10,27 @@ import { useState, useEffect } from "react";
 import { Link } from "@react-navigation/native";
 import { useWindowDimensions } from "react-native";
 
-//components
-import TextInputComponent from "../components /ui/TextInputComponent";
-import ButtonComponent from "../components /ui/ButtonComponent";
-import TextComponent from "../components /ui/TextComponent";
-import LogoComponent from "../components /ui/LogoComponent";
+//components--------------------------------
+import TextInputComponent from "../components/ui/TextInputComponent";
+import ButtonComponent from "../components/ui/ButtonComponent";
+import TextComponent from "../components/ui/TextComponent";
+import LogoComponent from "../components/ui/LogoComponent";
+//-----------------------------------------
 
 import Colors from "../constants/Colors";
 import logo from "../assets/images/logo.png";
 
-
 const Login = ({ navigation }) => {
- const window = useWindowDimensions();
-
-  //userinfo----------
+  const displaySmall = useWindowDimensions().height < 777 ;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //------------------
+  //-----------------------------------------
 
-  //handlers---------
+  //handlers---------------------------------
   const emailChangeHandler = (value) => {
     setEmail(value);
   };
+    //-----------------------------------------
 
   const emailBlurHandler = () => {
     setValidations((prevState) => {
@@ -89,28 +88,30 @@ const Login = ({ navigation }) => {
     <Pressable style={styles.screen} onPress={Keyboard.dismiss}>
       <View style={styles.container}>
 
-        <View style={{...styles.logoContainer, marginTop: window.height < 800 ? 0  : 70,}}>
-          <LogoComponent width={70} height={70} logo={logo} />
+        <View style={{...styles.logoContainer, marginTop:displaySmall ? 20 : 70,}}>
+          <LogoComponent width={displaySmall ? 50 : 70} height={displaySmall ? 50 : 70} logo={logo} />
         </View>
 
-        <View style={{...styles.titleContainer, marginBottom: window.height < 800 ? 0 : 30  }}>
+        <View style={{...styles.titleContainer, marginBottom:displaySmall ? 0 : 30  }}>
           <TextComponent
             color={Colors.black}
             title='Welcome'
             fontWeight={"300"}
-            fontSize={35}
+            fontSize={displaySmall ? 25 : 35}
           />
           <TextComponent
             color={Colors.grey}
             title='Sign In to Continue'
             fontWeight={"300"}
-            fontSize={16}
+            fontSize={displaySmall ? 12 : 16}
           />
         </View>
 
         <TextInputComponent
+          height={displaySmall ? 50 : 60}
           type='e-mail'
           icon='md-mail'
+          iconSize={displaySmall ? 20 : 30}
           iconColor={Colors.inputIconColor}
           placeholder={"Email"}
           onChangeText={emailChangeHandler}
@@ -119,11 +120,14 @@ const Login = ({ navigation }) => {
           value={email}
           error={showEmailErrorMessage}
           errorMessage='The email is invalid'
+          marginVertical={displaySmall ? 10 : 20}
+          borderColor={'transparent'}
         />
 
         <TextInputComponent
           type='password'
           icon='lock-closed'
+          iconSize={displaySmall ? 20 : 30}
           iconColor={Colors.inputIconColor}
           placeholder={"Password"}
           onChangeText={passwordHandler}
@@ -134,24 +138,27 @@ const Login = ({ navigation }) => {
           value={password}
           error={showPasswordErrorMessage}
           errorMessage="The field can't be empty"
+          marginVertical={displaySmall ? 20 : 20}
+          borderColor={'transparent'}
         />
 
         <Link style={styles.link} to={{ screen: "ForgotPassword" }}>
           Forgot password?
         </Link>
 
-        <View style={{...styles.btnContainer,marginTop:window.height < 800? 50 : 80}}>
+        <View style={{...styles.btnContainer,marginTop:displaySmall ? 30 : 80}}>
           <ButtonComponent
             width={"100%"}
+            padding={displaySmall ? 10 : 20}
             backgroundColor={Colors.buttonBlue}
             title='Sign In'
-            fontSize={20}
+            fontSize={displaySmall ? 16 : 20}
             color='#fff'
             type='submit'
           />
         </View>
 
-        <View style={{...styles.signUpTextContainer,marginBottom: window.height < 800 ? 20 : 40}}>
+        <View style={{...styles.signUpTextContainer,marginBottom:displaySmall ? 20 : 40}}>
           <Text>Don't you have and account?</Text>
           <Link style={styles.link} to={{ screen: "SignUp" }}>
             Sign Up
@@ -159,7 +166,7 @@ const Login = ({ navigation }) => {
         </View>
 
         <View style={styles.footerTextContainer}>
-          <Text style={styles.footerText}>
+          <Text style={{...styles.footerText, fontSize:displaySmall ? 10 : 14}}>
             By tapping Sing In,you agree to our{" "}
             <Link style={styles.link} to={{ screen: "" }}>
               Terms
@@ -208,7 +215,6 @@ const styles = StyleSheet.create({
   },
 
   btnContainer: {
-    
     marginBottom: 20,
   },
 

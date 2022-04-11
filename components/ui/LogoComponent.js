@@ -1,17 +1,15 @@
 import { Image } from "react-native";
-import { useWindowDimensions } from 'react-native';
 
-const LogoComponent = (props) => {  
-
-  const window = useWindowDimensions();
+const LogoComponent = (props) => {
   return (
-      <Image
-        style={{ 
-          width: window.height < 700 ? 40 : props.height,
-          height:window.height < 700 ? 40 : props.height 
-        }}
-        source={props.logo}
-      />
+    <Image
+      style={{
+        width: props.width,
+        height: props.height,
+        padding: 10,
+      }}
+      source={props.logo}
+    />
   );
 };
 

@@ -13,13 +13,13 @@ const TextInputComponent = (props) => {
     <Pressable
       style={{
         backgroundColor: props.backgroundColor ?? "#fff",
-        borderColor: props.error ? Colors.validationRed : "transparent",
+        borderColor: props.error ? Colors.validationRed : props.borderColor,
         position: "relative",
         borderWidth: 1,
         width: props.width ?? "100%",
         flexDirection: "row",
-        height: 60,
-        marginVertical: 20,
+        height: props.height,
+        marginVertical: props.marginVertical,
         padding: 10,
         borderRadius: 10,
         alignContent: "center",
@@ -27,7 +27,7 @@ const TextInputComponent = (props) => {
       <View style={styles.icon}>
         <Ionicons
           name={props.icon}
-          size={30}
+          size={props.iconSize}
           color={props.iconColor}></Ionicons>
       </View>
 
@@ -56,7 +56,7 @@ const TextInputComponent = (props) => {
               right: "20%",
             }}
             name={secureText ? "eye-off" : "eye"}
-            size={30}
+            size={props.iconSize}
             color={props.iconColor}
             onPress={iconPressHandler}></Ionicons>
         )}

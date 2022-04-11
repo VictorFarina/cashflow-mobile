@@ -7,7 +7,8 @@ const ButtonComponent = (props) => {
         alignItems: "center",
         backgroundColor: props.backgroundColor,
         width: props.width,
-        padding: 20,
+        marginVertical: props.marginVertical,
+        padding: props.padding,
         borderRadius: 5,
       }}
       onPress={props.onPress}>
