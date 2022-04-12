@@ -14,6 +14,7 @@ const Forgot = (props) => {
   //responsiveness
   const displaySmall = useWindowDimensions().height < 800;
   const [email, setEmail] = useState("");
+
   const [emailSent, setEmailSent] = useState(false);
   const [verificationCode, setVerificationCode] = useState(false);
   //handlers---------------------------------
@@ -67,7 +68,7 @@ const Forgot = (props) => {
     <View style={styles.screen}>
       <LogoComponent width={236} height={40} logo={logo} />
 
-      <View style={styles.container}>
+     <View style={styles.container}>
         <TextComponent
           color={Colors.black}
           title={!emailSent ? "¿Olvidaste tu contraseña?" : "Verificar cuenta "}
