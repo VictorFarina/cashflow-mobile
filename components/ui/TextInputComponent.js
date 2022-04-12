@@ -9,6 +9,7 @@ const TextInputComponent = (props) => {
   const iconPressHandler = () => {
     setSecureText((prevState) => !prevState);
   };
+
   return (
     <Pressable
       style={{
@@ -23,12 +24,14 @@ const TextInputComponent = (props) => {
         padding: 10,
         borderRadius: 10,
         alignContent: "center",
-      }}>
+      }}
+    >
       <View style={styles.icon}>
         <Ionicons
           name={props.icon}
           size={props.iconSize}
-          color={props.iconColor}></Ionicons>
+          color={props.iconColor}
+        ></Ionicons>
       </View>
 
       <View style={styles.input}>
@@ -58,7 +61,8 @@ const TextInputComponent = (props) => {
             name={secureText ? "eye-off" : "eye"}
             size={props.iconSize}
             color={props.iconColor}
-            onPress={iconPressHandler}></Ionicons>
+            onPress={iconPressHandler}
+          ></Ionicons>
         )}
       </View>
     </Pressable>
