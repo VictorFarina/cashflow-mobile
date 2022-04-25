@@ -11,22 +11,29 @@ import Colors from "../constants/Colors";
 
 const Stack = createStackNavigator();
 
+
 const Navigator = () => {
+
+
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerShown: false,
+          headerShown: true,
+          headerTitle:'',
           headerStyle: {
             backgroundColor: Colors.CashFlowBlue,
           },
-          headerTintColor: "#fff",
+          headerTintColor: "black",
           headerTitleStyle: {
             fontWeight: "bold",
           },  
         }}> 
-        <Stack.Screen name='Login' component={LoginScreen} />
-        <Stack.Screen name='ForgotPassword' component={ForgotScreen} />
+        <Stack.Screen 
+        name='Login' 
+        component={LoginScreen} 
+        options={{headerShown: false,headerTitle:''}}/>
+        <Stack.Screen name='ForgotPassword' component={ForgotScreen}/>
         <Stack.Screen name='SignUp' component={SignUpScreen} />
       </Stack.Navigator>
     </NavigationContainer>

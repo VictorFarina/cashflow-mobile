@@ -3,190 +3,178 @@ import {
   StyleSheet,
   Text,
   View,
-  Platform,
   Pressable,
+  SafeAreaView,
 } from "react-native";
-import { useState, useEffect } from "react";
-import { Link } from "@react-navigation/native";
-import { useWindowDimensions } from "react-native";
-
+import useScreenSizes from "../hooks/use-screen-sizes";
 //components--------------------------------
-import TextInputComponent from "../components/ui/TextInputComponent";
+import InputComponent from "../components/ui/InputComponent";
 import ButtonComponent from "../components/ui/ButtonComponent";
 import TextComponent from "../components/ui/TextComponent";
 import LogoComponent from "../components/ui/LogoComponent";
-//-----------------------------------------
+import LinkComponent from "../components/ui/LinkComponent";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../store/actions/userActions";
+
+//Custom hooks
+import useInput from "../hooks/use-input";
 
 import Colors from "../constants/Colors";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/Logo.png";
 
-const Login = ({ navigation }) => {
-  const displaySmall = useWindowDimensions().height < 777 ;
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  //-----------------------------------------
 
-  //handlers---------------------------------
-  const emailChangeHandler = (value) => {
-    setEmail(value);
-  };
-    //-----------------------------------------
+const LoginScreen = ({ navigation }) => {
 
-  const emailBlurHandler = () => {
-    setValidations((prevState) => {
-      return {
-        ...prevState,
-        emailIsPressed: true,
-      };
-    });
+  const loggedIn = useSelector(state=>state.userReducer.loggedIn);
+  const activeUser = useSelector(state=>state.userReducer.activeUser);
+  
+  const dispatch = useDispatch();
+
+  const display = useScreenSizes();
+  const emailValidation = (email) => {
+    return email.trim().length > 6 && email.trim().includes("@");
   };
 
-  const passwordBlurHandler = () => {
-    setValidations((prevState) => {
-      return {
-        ...prevState,
-        passwordIsPressed: true,
-      };
-    });
+  const email = ({
+    value,
+    isValid,
+    hasError,
+    changeHandler,
+    blurHandler,
+    reset,
+    validationMessages,
+  } = useInput("Email", "min:5", emailValidation));
+
+  const password = ({
+    value,
+    isValid,
+    hasError,
+    changeHandler,
+    blurHandler,
+    reset,
+    validationMessages,
+  } = useInput("Password", "required"));
+
+  const pressHandler = () => {
+    dispatch(loginUser(email.value, password.value));
+    console.log('loggedIn ?  =' + ''+ loggedIn);
+    console.log('activeUser: ?  =' + ''+ activeUser);
+
   };
-
-  const passwordHandler = (value) => {
-    setPassword(value);
-  };
-  //------------------
-
-  //Validation-----------
-  const [validations, setValidations] = useState({
-    isEmailValid: false,
-    emailIsPressed: false,
-    isPasswordValid: false,
-    passwordIsPressed: false,
-  });
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setValidations((prevState) => {
-        return {
-          ...prevState,
-          emailIsValid: email.trim().length > 6 && email.trim().includes("@"),
-          passwordIsValid: password.trim().length > 0,
-        };
-      });
-    }, 500);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [email, password]);
-
-  let showEmailErrorMessage =
-    !validations.emailIsValid && validations.emailIsPressed;
-  let showPasswordErrorMessage =
-    !validations.passwordIsValid && validations.passwordIsPressed;
-  //--------------------------------------------------------------
 
   return (
     <Pressable style={styles.screen} onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-
-        <View style={{...styles.logoContainer, marginTop:displaySmall ? 20 : 70,}}>
-          <LogoComponent width={displaySmall ? 50 : 70} height={displaySmall ? 50 : 70} logo={logo} />
+      <SafeAreaView style={styles.container}>
+        <View style={styles.logoContainer}>
+          <LogoComponent
+            width={display.small ? 50 : 70}
+            height={display.small ? 50 : 70}
+            logo={logo}
+          />
+          
         </View>
 
-        <View style={{...styles.titleContainer, marginBottom:displaySmall ? 0 : 30  }}>
+        <View
+          style={{
+            ...styles.titleContainer,
+          }}>
           <TextComponent
+            textAlign={"left"}
             color={Colors.black}
             title='Welcome'
             fontWeight={"300"}
-            fontSize={displaySmall ? 25 : 35}
+            fontSize={display.small ? 25 : 35}
           />
           <TextComponent
+            textAlign={"left"}
             color={Colors.grey}
             title='Sign In to Continue'
             fontWeight={"300"}
-            fontSize={displaySmall ? 12 : 16}
+            fontSize={display.small ? 12 : 16}
           />
         </View>
 
-        <TextInputComponent
-          height={displaySmall ? 50 : 60}
+        <InputComponent
           type='e-mail'
           icon='md-mail'
-          iconSize={displaySmall ? 20 : 30}
+          iconSize={display.small ? 20 : 30}
           iconColor={Colors.inputIconColor}
           placeholder={"Email"}
-          onChangeText={emailChangeHandler}
-          onBlur={emailBlurHandler}
-          backgroundColor={Colors.inputGrey}
-          value={email}
-          error={showEmailErrorMessage}
+          onChangeText={email.changeHandler}
+          onBlur={email.blurHandler}
+          value={email.value}
+          error={email.hasError}
           errorMessage='The email is invalid'
-          marginVertical={displaySmall ? 10 : 20}
-          borderColor={'transparent'}
+          marginTop={80}
+          borderColor={"transparent"}
         />
 
-        <TextInputComponent
+        <InputComponent
           type='password'
-          icon='lock-closed'
-          iconSize={displaySmall ? 20 : 30}
+          icon='lock-closed' 
+          iconSize={display.small ? 20 : 30}
           iconColor={Colors.inputIconColor}
           placeholder={"Password"}
-          onChangeText={passwordHandler}
+          onChangeText={password.changeHandler}
           backgroundColor={Colors.inputGrey}
-          onBlur={passwordBlurHandler}
+          onBlur={password.blurHandler}
           autoCapitalize='none'
           autoCorrect={false}
-          value={password}
-          error={showPasswordErrorMessage}
+          value={password.value}
+          error={password.hasError}
           errorMessage="The field can't be empty"
-          marginVertical={displaySmall ? 20 : 20}
-          borderColor={'transparent'}
+          borderColor={"transparent"}
         />
 
-        <Link style={styles.link} to={{ screen: "ForgotPassword" }}>
-          Forgot password?
-        </Link>
-
-        <View style={{...styles.btnContainer,marginTop:displaySmall ? 30 : 80}}>
-          <ButtonComponent
-            width={"100%"}
-            padding={displaySmall ? 10 : 20}
-            backgroundColor={Colors.buttonBlue}
-            title='Sign In'
-            fontSize={displaySmall ? 16 : 20}
-            color='#fff'
-            type='submit'
+        <View style={{ width: "100%" }}>
+          <LinkComponent
+            title='Forgot Password?'
+            to='ForgotPassword'
+            textAlign={"right"}
           />
         </View>
 
-        <View style={{...styles.signUpTextContainer,marginBottom:displaySmall ? 20 : 40}}>
-          <Text>Don't you have and account?</Text>
-          <Link style={styles.link} to={{ screen: "SignUp" }}>
-            Sign Up
-          </Link>
+        <View style={styles.btnContainer}>
+          <ButtonComponent
+            marginTop={40}
+            width={"100%"}
+            backgroundColor={Colors.buttonBlue}
+            title={!loggedIn ? 'Sign In' : 'log out'}
+            fontSize={display.small ? 16 : 20}
+            color='#fff'
+            type='submit'
+            onPress={pressHandler}
+          />
+        </View>
+
+        <View
+          style={{
+            ...styles.signUpTextContainer,
+            marginBottom: display.small ? 20 : 40,
+          }}>
+          <Text style={{ fontSize: display.small ? 10 : 14 }}>
+            Don't you have and account?{"  "}
+          </Text>
+
+          <LinkComponent title='Sign Up?' to='SignUp' />
         </View>
 
         <View style={styles.footerTextContainer}>
-          <Text style={{...styles.footerText, fontSize:displaySmall ? 10 : 14}}>
+          <Text
+            style={{ ...styles.footerText, fontSize: display.small ? 10 : 14 }}>
             By tapping Sing In,you agree to our{" "}
-            <Link style={styles.link} to={{ screen: "" }}>
-              Terms
-            </Link>{" "}
-            and have read and acknowledge our{" "}
-            <Link style={styles.link} to={{ screen: "" }}>
-              Privacy Policy
-            </Link>
+            <LinkComponent title='Terms' to='' /> and have read and acknowledge
+            our <LinkComponent title='Privacy Policy?' to='' />
           </Text>
         </View>
-      </View>
+      </SafeAreaView>
     </Pressable>
   );
 };
 
-export default Login;
-
+export default LoginScreen;
 
 const styles = StyleSheet.create({
-
   screen: {
     flex: 1,
     backgroundColor: "#fff",
@@ -195,7 +183,9 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    width: Platform.isPad ? "40%" : "80%",
+    height: "80%",
+    width: "80%",
+    alignItems: "center",
   },
 
   logoContainer: {
@@ -205,28 +195,21 @@ const styles = StyleSheet.create({
 
   titleContainer: {
     width: "100%",
-
-  },
-
-  link: {
-    color: Colors.linkBLue,
-    textAlign: "right",
-    marginHorizontal: 5,
   },
 
   btnContainer: {
+    width: "100%",
     marginBottom: 20,
+    marginTop: 20,
   },
 
   signUpTextContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    
   },
   footerTextContainer: {
     alignSelf: "center",
     justifyContent: "center",
-    width: Platform.isPad ? "75%" : "95%",
   },
   footerText: {
     textAlign: "center",

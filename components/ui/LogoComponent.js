@@ -4,9 +4,10 @@ const LogoComponent = (props) => {
   return (
     <Image
       style={{
+        marginTop: props.marginTop,
+        marginBottom: props.marginBottom,
         width: props.width,
         height: props.height,
-        padding: 10,
       }}
       source={props.logo}
     />

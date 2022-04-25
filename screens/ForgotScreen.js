@@ -1,143 +1,119 @@
-import { StyleSheet, Text, View } from "react-native";
-import { useEffect, useState } from "react";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import {
+  StyleSheet,
+  Pressable,
+  SafeAreaView,
+  Keyboard,
+  Text,
+} from "react-native";
+import { useState } from "react";
 import LogoComponent from "../components/ui/LogoComponent";
 import logo from "../assets/images/cashflow-logo-text.png";
-import { useWindowDimensions } from "react-native";
-import TextInputComponent from "../components/ui/TextInputComponent";
-import TextComponent from "../components/ui/TextComponent";
-import ButtonComponent from "../components/ui/ButtonComponent";
+import ForgotPassWordComponent from "../components/forgotComponents/ForgotPassWordComponent";
+import useInput from "../hooks/use-input";
+import useScreenSizes from "../hooks/use-screen-sizes";
+import { View } from "react-native-web";
 
-import Colors from "../constants/Colors";
-
-const Forgot = (props) => {
-  //responsiveness
-  const displaySmall = useWindowDimensions().height < 800;
-  const [email, setEmail] = useState("");
-
+const ForgotScreen = (props) => {
+  const display = useScreenSizes();
+  const emailValidation = (email) => {
+    return email.trim().length > 6 && email.trim().inclaudes("@");
+  };
   const [emailSent, setEmailSent] = useState(false);
-  const [verificationCode, setVerificationCode] = useState(false);
-  //handlers---------------------------------
-  const emailChangeHandler = (value) => {
-    setEmail(value);
+  const email = ({
+    value,
+    isValid,
+    hasError,
+    changeHandler,
+    blurHandler,
+    reset,
+    validationMessages,
+  } = useInput("Email", "", emailValidation));
+
+  const [verifiedUser, setVerifiedUser] = useState(false);
+
+  const emailSentHandler = () => {
+    //request
+    // recieve digits
+    setEmailSent(true);
   };
 
-  const emailBlurHandler = () => {
-    setValidations((prevState) => {
-      return {
-        ...prevState,
-        emailIsPressed: true,
-      };
-    });
+  const validNumberHandler = () => {
+    //validation
+    //request
+
+    setVerifiedUser(true);
   };
 
-  //Validation------------------------------------
-  const [validations, setValidations] = useState({
-    isEmailValid: false,
-    emailIsPressed: false,
-  });
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setValidations((prevState) => {
-        return {
-          ...prevState,
-          emailIsValid: email.trim().length > 6 && email.trim().includes("@"),
-        };
-      });
-    }, 500);
+  let screen = (
+    <ForgotPassWordComponent
+      title='¿Olvidaste tu contraseña?'
+      text='No te preocupes, comienza el proceso de recuperación llenando este campo.'
+      inputType={"e-mail"}
+      inputPlaceholder={"Email"}
+      inputErrorMessage='The email is invalid'
+      inputOnOlur={props.onBlur}
+      inputonChangeText={props.changeEmailHandler}
+      inputError={props.hasError}
+      handler={emailSentHandler}
+      changeEmailHandler={email.changeHandler}
+      inputValue={email.value}
+      hasError={email.hasError}
+    />
+  );
 
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [email]);
+  if (emailSent) {
+    screen = (
+      <ForgotPassWordComponent
+        title='Verificar cuenta'
+        text='Por favor escribe los 4 números que hemos enviado a su correo'
+        inputErrorMessage='The email is invalid'
+        inputOnBlur={props.onBlur}
+        inputonChangeText={props.changeEmailHandler}
+        inputError={props.hasError}
+        emailSent={emailSentHandler}
+        changeEmailHandler={email.changeHandler}
+        inputValue={email.value}
+        hasError={email.hasError}
+        handler={validNumberHandler}
+      />
+    );
+  }
 
-  let showEmailErrorMessage =
-    !validations.emailIsValid && validations.emailIsPressed;
-
-    const pressHandler = () => {
-      setEmailSent((prevState)=> !prevState)
-      
-    }
-
-  //------------------------------------------
-
-  
-
+  if (verifiedUser) {
+    screen = (
+      <ForgotPassWordComponent
+        verifiedUser={verifiedUser}
+        title='Nueva contraseña'
+        inputPlaceholder='Contraseña'
+        inputPlaceholder2='Repetir contraseña'
+      />
+    );
+  }
 
   return (
-    <View style={styles.screen}>
-      <LogoComponent width={236} height={40} logo={logo} />
-
-     <View style={styles.container}>
-        <TextComponent
-          color={Colors.black}
-          title={!emailSent ? "¿Olvidaste tu contraseña?" : "Verificar cuenta "}
-          fontWeight={"500"}
-          fontSize={displaySmall ? 12 : 18}
-          marginVertical={20}
-        />
-        <TextComponent
-          color={Colors.black}
-          title={
-            !emailSent
-              ? "No te preocupes, comienza el proceso de recuperación llenando este campo."
-              : "Por favor escribe los 4 números que hemos enviado a su correo."
-          }
-          fontWeight={"300"}
-          fontSize={displaySmall ? 10 : 14}
-          marginVertical={10}
-        />
-
-        <TextInputComponent
-          height={displaySmall ? 50 : 60}
-          type={!emailSent ? "e-mail" : ""}
-          icon={!emailSent ? "md-mail" : ""}
-          iconSize={displaySmall ? 20 : 30}
-          iconColor={Colors.inputIconColor}
-          placeholder={!emailSent ? "Email" : 'Confirmtion code'}
-          onChangeText={emailChangeHandler}
-          onBlur={emailBlurHandler}
-          backgroundColor={Colors.inputGrey}
-          value={!emailSent ? email : verificationCode}
-          error={showEmailErrorMessage}
-          errorMessage='The email is invalid'
-          marginVertical={displaySmall ? 10 : 20}
-          borderColor={"transparent"}
-        />
-
-        <ButtonComponent
-          width={"100%"}
-          padding={15}
-          backgroundColor={Colors.buttonBlue}
-          title='Continue'
-          fontSize={displaySmall ? 16 : 20}
-          color='#fff'
-          type='submit'
-          marginVertical={30}
-          onPress={pressHandler.bind(this, email)}
-        />
-      </View>
-    </View>
+    <Pressable style={styles.screen} onPress={Keyboard.dismiss}>
+      <SafeAreaView style={styles.container}>
+        <LogoComponent width={236} height={40} logo={logo} />
+        {screen}
+      </SafeAreaView>
+    </Pressable>
   );
 };
 
-export default Forgot;
+export default ForgotScreen;
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: "#F8F8F8",
     flex: 1,
-    width: "100%",
+    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+
   },
 
   container: {
-    padding: 30,
+    height:'80%' ,
+    width: "80%",
     alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 40,
-    width: "90%",
-    borderRadius: 30,
   },
 });

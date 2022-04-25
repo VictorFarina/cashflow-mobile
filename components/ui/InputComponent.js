@@ -1,34 +1,61 @@
 import { StyleSheet, TextInput, View, Pressable } from "react-native";
 import { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import ErrorMessageComponent from "../ui/ErrorMessageComponent";
+import ErrorMessageComponent from "./ErrorMessageComponent";
 import Colors from "../../constants/Colors";
+import useScreenSizes from "../../hooks/use-screen-sizes";
 
-const TextInputComponent = (props) => {
+const InputComponent = (props) => {
+  const display = useScreenSizes();
   const [secureText, setSecureText] = useState(props.type === "password");
   const iconPressHandler = () => {
     setSecureText((prevState) => !prevState);
   };
+
   return (
     <Pressable
       style={{
-        backgroundColor: props.backgroundColor ?? "#fff",
-        borderColor: props.error ? Colors.validationRed : props.borderColor,
+        backgroundColor: props.backgroundColor ?? Colors.inputGrey,
+        borderColor: props.error ? Colors.validationRed : 'transparent',
         position: "relative",
         borderWidth: 1,
+        marginTop:props.marginTop,
         width: props.width ?? "100%",
         flexDirection: "row",
-        height: props.height,
-        marginVertical: props.marginVertical,
+        height: display.small
+          ? 50
+          : display.medium
+          ? 56
+          : display.large
+          ? 60
+          : 70,
+        marginVertical: display.small
+          ? 10
+          : display.medium
+          ? 20
+          : display.large
+          ? 20
+          : display.iPad && 40,
         padding: 10,
         borderRadius: 10,
         alignContent: "center",
+        marginTop:props.marginTop
       }}>
       <View style={styles.icon}>
         <Ionicons
-          name={props.icon}
-          size={props.iconSize}
-          color={props.iconColor}></Ionicons>
+          name={
+            props.type === "e-mail"
+              ? "md-mail"
+              : props.type === "password"
+              ? "lock-closed"
+              : ""
+          }
+          size={
+            display.small ? 20 : display.medium ? 25 : display.large ? 30 : 30
+          }
+          color={props.iconColor ?? Colors.inputIconColor}>
+          {" "}
+        </Ionicons>
       </View>
 
       <View style={styles.input}>
@@ -56,8 +83,10 @@ const TextInputComponent = (props) => {
               right: "20%",
             }}
             name={secureText ? "eye-off" : "eye"}
-            size={props.iconSize}
-            color={props.iconColor}
+            size={
+              display.small ? 20 : display.medium ? 30 : display.large ? 35 : 30
+            }
+            color={props.iconColor ?? Colors.inputIconColor}
             onPress={iconPressHandler}></Ionicons>
         )}
       </View>
@@ -65,7 +94,7 @@ const TextInputComponent = (props) => {
   );
 };
 
-export default TextInputComponent;
+export default InputComponent;
 
 const styles = StyleSheet.create({
   icon: {
