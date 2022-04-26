@@ -14,7 +14,7 @@ const LinkComponent = (props) => {
       style={{
         color: Colors.linkBLue,
         textAlign: props.textAlign,
-        fontSize: props.fontSize ?? display.small ? 10 : 12
+        fontSize: props.fontSize 
       }}
       to={{ screen: props.to }}>
       {props.title}

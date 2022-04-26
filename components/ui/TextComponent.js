@@ -9,7 +9,7 @@ const TextComponent = (props) => {
     <Text
       style={{
         textAlign:props.textAlign ?? 'center',
-        fontWeight: props.fontWeight ?? '300',
+        fontWeight: props.fontWeight ?? 'normal',
         fontSize: window.height < 700 ? 20 : props.fontSize ,
         color: props.color,
         fontSize: props.fontSize,

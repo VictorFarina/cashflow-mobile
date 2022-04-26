@@ -1,6 +1,6 @@
 export default {
     cashFlowBlue:'#0063D1',
-    buttonBlue:'#3E9AFD',
+    buttonBlue:'#1270E4',
     linkBLue:'#62ACFD',
     inputGrey:'#EBEEF3',
     inputIconColor:'#C9CDD4',

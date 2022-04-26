@@ -11,14 +11,13 @@ const SignUpScreen = () => {
   return (
     <SafeAreaView style={styles.screen}>
       <View style={styles.container}>
-        <LogoComponent width={236} height={40} logo={logo} marginBottom={30} />
-        <TextComponent title='Registro' fontSize={20} marginBottom={30} />
-        <InputComponent headerTitle='Nombre' height={20} />
-        <InputComponent headerTitle='Apellido' height={20} />
-        <InputComponent headerTitle='Correo' height={20} />
-        <InputComponent headerTitle='Conntraseña' height={20} />
+        <TextComponent title='Registro' fontSize={20} fontWeight={'bold'} marginBottom={30} />
+        <InputComponent placeholder='Nombre' height={25}/>
+        <InputComponent placeholder='Apellido' height={25}  />
+        <InputComponent type={'e-mail'} placeholder='Correo' height={25} />
+        <InputComponent type={'password'} placeholder='Contraseña' height={25} />
         <View style={styles.domainInputContainer}>
-          <InputComponent headerTitle='Dominio' height={20} width={"68%"} />
+          <InputComponent placeholder='Dominio'  width={"68%"} height={25} />
           <TextComponent title='@cashflow.do' textAlign='right' />
         </View>
         <View style={styles.termsContainer}>
@@ -27,13 +26,14 @@ const SignUpScreen = () => {
             <Text>
               Acepto los{" "}
               <LinkComponent
+                fontSize={14}
                 title={"Términos de Uso & Política de Privacidad"}
               />
             </Text>
           </View>
         </View>
 
-        <ButtonComponent title='Crear Cuenta' padding={10} />
+        <ButtonComponent title='Crear Cuenta' padding={10} marginTop={'10%'} fontWeight={'bold'}/>
       </View>
     </SafeAreaView>
   );
@@ -65,11 +65,11 @@ const styles = StyleSheet.create({
   termsContainer: {
     width: "100%",
     flexDirection: "row",
+    marginTop: 10,
   },
 
   termsTextContainer: {
     marginLeft: 20,
-    width: "60%",
     flexDirection: "row",
   },
 });

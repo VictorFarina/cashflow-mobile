@@ -26,6 +26,7 @@ const ButtonComponent = (props) => {
       <Text
         style={{
           fontSize: props.fontSize ?? 20,
+          fontWeight: props.fontWeight ,
           color: props.textColor ?? '#fff',
         }}>
         {props.title}

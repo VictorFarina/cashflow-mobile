@@ -58,7 +58,7 @@ const InputComponent = (props) => {
                 : ""
             }
             size={
-              display.small ? 20 : display.medium ? 25 : display.large ? 30 : 30
+              props.height === 25 ? 20 : 30
             }
             color={props.iconColor ?? Colors.inputIconColor}>
             {" "}
@@ -93,13 +93,7 @@ const InputComponent = (props) => {
               }}
               name={secureText ? "eye-off" : "eye"}
               size={
-                display.small
-                  ? 20
-                  : display.medium
-                  ? 30
-                  : display.large
-                  ? 35
-                  : 30
+                 props.height === 25 ? 20 : 30
               }
               color={props.iconColor ?? Colors.inputIconColor}
               onPress={iconPressHandler}></Ionicons>
@@ -114,8 +108,9 @@ export default InputComponent;
 
 const styles = StyleSheet.create({
   headerTitle: {
-    top:'-70%',
+    top:'-90%',
     textAlign: "left",
+     fontWeight: "bold",
     position: "absolute",
 
   },

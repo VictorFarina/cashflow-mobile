@@ -5,21 +5,21 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "../screens/LoginScreen";
 import ForgotScreen from "../screens/ForgotScreen";
 import SignUpScreen from "../screens/SignUpScreen";
+import LogoComponent from "../components/ui/LogoComponent";
+import logo from "../assets/images/../images/cashflow-logo-text.png";
 //constants
 import Colors from "../constants/Colors";
 
 const Stack = createStackNavigator();
 
 const Navigator = () => {
+ 
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerShown: true,
           headerTitle: "",
-          headerStyle: {
-            backgroundColor: Colors.CashFlowBlue,
-          },
           headerTintColor: "black",
           headerTitleStyle: {
             fontWeight: "bold",
@@ -34,8 +34,11 @@ const Navigator = () => {
         <Stack.Screen
           name='SignUp'
           component={SignUpScreen}
-          
+          options={{
+            headerTitle: () => <LogoComponent logo={logo} width={150} height={25} />
+          }}
         />
+       
       </Stack.Navigator>
     </NavigationContainer>
   );

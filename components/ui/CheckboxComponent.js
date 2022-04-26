@@ -6,8 +6,6 @@ import Colors from "../../constants/Colors";
 
 const CheckboxComponent = () => {
   const [checked, setChecked] = useState(false);
-  console.log(checked);
-
   const pressHandler = () => {
     setChecked((prevState) => !prevState);
     console.log(checked);
@@ -20,7 +18,7 @@ const CheckboxComponent = () => {
         backgroundColor: checked ? Colors.buttonBlue : "#fff",
         color: checked ? Colors.black : "transparent",
       }}
-      name='checkmark'
+      name='md-checkmark'
       onPress={pressHandler}></Ionicons>
   );
 };
@@ -29,8 +27,8 @@ export default CheckboxComponent;
 
 const styles = StyleSheet.create({
   icon: {
-    height: 30,
-    width: 30,
+    height: 25,
+    width: 25,
     fontSize: 28,
     borderWidth: 1,
     borderColor: "#CCCCCC",
