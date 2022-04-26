@@ -1,5 +1,6 @@
 import { Text, TouchableOpacity } from "react-native";
 import useScreenSizes from "../../hooks/use-screen-sizes";
+import Colors from "../../constants/Colors";
 
 const ButtonComponent = (props) => {
   const display = useScreenSizes();
@@ -7,10 +8,11 @@ const ButtonComponent = (props) => {
   
     <TouchableOpacity
       style={{
+
         alignItems: "center",
-        backgroundColor: props.backgroundColor,
+        backgroundColor: props.backgroundColor ?? Colors.buttonBlue,
         width: props.width ?? '100%',
-        marginTop: props.marginTop,
+        marginTop: props.marginTop ?? 10 ,
         padding: props.padding ?? display.small
             ? 20
             : display.medium
@@ -23,8 +25,8 @@ const ButtonComponent = (props) => {
       onPress={props.onPress} >
       <Text
         style={{
-          fontSize: props.fontSize,
-          color: props.color,
+          fontSize: props.fontSize ?? 20,
+          color: props.textColor ?? '#fff',
         }}>
         {props.title}
       </Text>

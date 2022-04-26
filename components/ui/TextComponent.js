@@ -9,12 +9,14 @@ const TextComponent = (props) => {
     <Text
       style={{
         textAlign:props.textAlign ?? 'center',
-        fontWeight: props.fontWeight,
+        fontWeight: props.fontWeight ?? '300',
         fontSize: window.height < 700 ? 20 : props.fontSize ,
         color: props.color,
         fontSize: props.fontSize,
         marginVertical: props.marginVertical ?? 0,
-        marginHorizontal: props.marginHorizontal ?? 0
+        marginHorizontal: props.marginHorizontal ?? 0,
+        marginBottom: props.marginBottom ?? 0,
+     
       }}>
       {props.title}
     </Text>

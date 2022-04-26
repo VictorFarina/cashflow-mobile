@@ -4,7 +4,7 @@ const LogoComponent = (props) => {
   return (
     <Image
       style={{
-        marginTop: props.marginTop,
+        marginTop: props.marginTop ?? 0,
         marginBottom: props.marginBottom,
         width: props.width,
         height: props.height,

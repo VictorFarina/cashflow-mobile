@@ -1,4 +1,3 @@
-
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -11,35 +10,35 @@ import Colors from "../constants/Colors";
 
 const Stack = createStackNavigator();
 
-
 const Navigator = () => {
-
-
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerShown: true,
-          headerTitle:'',
+          headerTitle: "",
           headerStyle: {
             backgroundColor: Colors.CashFlowBlue,
           },
           headerTintColor: "black",
           headerTitleStyle: {
             fontWeight: "bold",
-          },  
-        }}> 
-        <Stack.Screen 
-        name='Login' 
-        component={LoginScreen} 
-        options={{headerShown: false,headerTitle:''}}/>
-        <Stack.Screen name='ForgotPassword' component={ForgotScreen}/>
-        <Stack.Screen name='SignUp' component={SignUpScreen} />
+          },
+        }}>
+        <Stack.Screen
+          name='Login'
+          component={LoginScreen}
+          options={{ headerShown: false, headerTitle: "" }}
+        />
+        <Stack.Screen name='ForgotPassword' component={ForgotScreen} />
+        <Stack.Screen
+          name='SignUp'
+          component={SignUpScreen}
+          
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
 export default Navigator;
-
-

@@ -20,7 +20,7 @@ import { loginUser } from "../store/actions/userActions";
 import useInput from "../hooks/use-input";
 
 import Colors from "../constants/Colors";
-import logo from "../assets/images/Logo.png";
+import logo from "../assets/images/logo.png";
 
 
 const LoginScreen = ({ navigation }) => {
