@@ -14,8 +14,6 @@ const InputComponent = (props) => {
 
   return (
    
-     
-
       <Pressable
         style={{
           backgroundColor: props.backgroundColor ?? Colors.inputGrey,
@@ -55,6 +53,10 @@ const InputComponent = (props) => {
                 ? "md-mail"
                 : props.type === "password"
                 ? "lock-closed"
+                : props.type==="name" 
+                ? "person-outline"
+                : props.type==="domain" 
+                ? "business-outline"
                 : ""
             }
             size={
@@ -66,20 +68,28 @@ const InputComponent = (props) => {
         </View>
 
         <View style={styles.input}>
+      
+  
+
           <TextInput
             onBlur={props.onBlur}
-            style={{
-              alignSelf: "center",
+            style={{...styles.textInputStyle,
               width: props.type === "password" ? "73%" : "100%",
               height: "100%",
             }}
-            numberOfLines={1}
+             
+         
+            textAlignVertical ="end"
             secureTextEntry={secureText}
             placeholder={props.placeholder}
             onChangeText={props.onChangeText}
             textAlign={"left"}
+            justifyContent
             value={props.value}
+           
           />
+
+        
           {props.error && (
             <ErrorMessageComponent message={props.errorMessage} />
           )}
@@ -98,6 +108,7 @@ const InputComponent = (props) => {
               color={props.iconColor ?? Colors.inputIconColor}
               onPress={iconPressHandler}></Ionicons>
           )}
+          
         </View>
       </Pressable>
    
@@ -117,11 +128,12 @@ const styles = StyleSheet.create({
   icon: {
     backgroundColor: "transparent",
     flexDirection: "row",
-    marginRight: 15,
+    marginRight: 2,
     marginTop: 5,
   },
 
   input: {
+    textAlignVertical:'bottom',
     zIndex: 30,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -129,4 +141,11 @@ const styles = StyleSheet.create({
     width: "100%",
     position: "relative",
   },
+
+  textInputStyle:{
+    textAlignVertical : "bottom",
+    marginTop:4,
+
+
+  }
 });

@@ -2,7 +2,7 @@ const actiontypes = () => {
 
   return {
     user: {
-      login: "LOG_IN",
+      login: "LOGIN",
     },
   };
 };

@@ -8,7 +8,7 @@ const CheckboxComponent = () => {
   const [checked, setChecked] = useState(false);
   const pressHandler = () => {
     setChecked((prevState) => !prevState);
-    console.log(checked);
+
   };
 
   return (
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   icon: {
     height: 25,
     width: 25,
-    fontSize: 28,
+    fontSize: 25,
     borderWidth: 1,
     borderColor: "#CCCCCC",
   },

@@ -4,10 +4,11 @@ import "react-native-gesture-handler";
 import userReducer from "./store/reducers/userReducer";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import { combineReducers } from "redux";
+import { applyMiddleware, combineReducers } from "redux";
+import thunk from 'redux-thunk';
 
 const reducer = combineReducers({ userReducer });
-const store = configureStore({ reducer });
+const store = configureStore({ reducer } ,applyMiddleware(thunk));
 
 
 LogBox.ignoreLogs([

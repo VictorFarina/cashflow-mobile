@@ -16,6 +16,7 @@ const TextComponent = (props) => {
         marginVertical: props.marginVertical ?? 0,
         marginHorizontal: props.marginHorizontal ?? 0,
         marginBottom: props.marginBottom ?? 0,
+        marginTop:props.marginTop ?? 0
      
       }}>
       {props.title}

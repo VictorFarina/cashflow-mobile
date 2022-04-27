@@ -12,12 +12,12 @@ const SignUpScreen = () => {
     <SafeAreaView style={styles.screen}>
       <View style={styles.container}>
         <TextComponent title='Registro' fontSize={20} fontWeight={'bold'} marginBottom={30} />
-        <InputComponent placeholder='Nombre' height={25}/>
-        <InputComponent placeholder='Apellido' height={25}  />
+        <InputComponent type={'name'} placeholder='Nombre' height={25}/>
+        <InputComponent type={'name'} placeholder='Apellido' height={25}  />
         <InputComponent type={'e-mail'} placeholder='Correo' height={25} />
         <InputComponent type={'password'} placeholder='Contraseña' height={25} />
         <View style={styles.domainInputContainer}>
-          <InputComponent placeholder='Dominio'  width={"68%"} height={25} />
+          <InputComponent type={'domain'} placeholder='Dominio'  width={"68%"} height={25} />
           <TextComponent title='@cashflow.do' textAlign='right' />
         </View>
         <View style={styles.termsContainer}>

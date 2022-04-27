@@ -15,14 +15,16 @@ export const loginUser = (email, password) => {
         password: password,
       }),
     });
+
     const result = await res.json();
 
-    
-
-    result.error ? console.log(result.error) : dispatch({type:'LOG_IN',payload:result})
-
-    
-
-
+    if (result.token) {
+      dispatch({
+        type: "LOGIN",
+        payload: result.token,
+      });
+    } else {
+      console.log(result.error);
+    }
   };
 };

@@ -1,15 +1,17 @@
 
 const initialState = {
-     loggedIn:false,
-     activeUser:{},
+     authToken:null
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "LOG_IN":
-      state.loggedIn = true
-      state.activeUser  =  action.payload
-      return state
+    case "LOGIN":
+     
+      return {
+        ...state, //copy all previuos states
+        authToken:action.payload
+    }
+   
     default:
       return state;
   }

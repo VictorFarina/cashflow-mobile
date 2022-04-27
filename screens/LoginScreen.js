@@ -18,23 +18,17 @@ import { loginUser } from "../store/actions/userActions";
 
 //Custom hooks
 import useInput from "../hooks/use-input";
-
 import Colors from "../constants/Colors";
 import logo from "../assets/images/logo.png";
 
-
 const LoginScreen = ({ navigation }) => {
-
-  const loggedIn = useSelector(state=>state.userReducer.loggedIn);
-  const activeUser = useSelector(state=>state.userReducer.activeUser);
-  
+  const userToken = useSelector(state=>state.userReducer.authToken);
+  const activeUser = useSelector(state=>state.userReducer.activeUser)
   const dispatch = useDispatch();
-
   const display = useScreenSizes();
   const emailValidation = (email) => {
     return email.trim().length > 6 && email.trim().includes("@");
   };
-
   const email = ({
     value,
     isValid,
@@ -57,9 +51,6 @@ const LoginScreen = ({ navigation }) => {
 
   const pressHandler = () => {
     dispatch(loginUser(email.value, password.value));
-    console.log('loggedIn ?  =' + ''+ loggedIn);
-    console.log('activeUser: ?  =' + ''+ activeUser);
-
   };
 
   return (
@@ -139,7 +130,7 @@ const LoginScreen = ({ navigation }) => {
             marginTop={40}
             width={"100%"}
             backgroundColor={Colors.buttonBlue}
-            title={!loggedIn ? 'Sign In' : 'log out'}
+            title={'Sign In'}
             fontSize={display.small ? 16 : 20}
             color='#fff'
             type='submit'
@@ -155,7 +146,6 @@ const LoginScreen = ({ navigation }) => {
           <Text style={{ fontSize: display.small ? 10 : 14 }}>
             Don't you have and account?{"  "}
           </Text>
-
           <LinkComponent title='Sign Up?' to='SignUp' />
         </View>
 
@@ -167,6 +157,7 @@ const LoginScreen = ({ navigation }) => {
             our <LinkComponent title='Privacy Policy?' to='' />
           </Text>
         </View>
+        
       </SafeAreaView>
     </Pressable>
   );
@@ -175,6 +166,7 @@ const LoginScreen = ({ navigation }) => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
+  
   screen: {
     flex: 1,
     backgroundColor: "#fff",

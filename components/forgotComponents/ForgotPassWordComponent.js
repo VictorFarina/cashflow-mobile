@@ -17,6 +17,7 @@ const ForgotPasswordComponent = (props) => {
         fontWeight={"500"}
         fontSize={20}
         marginVertical={20}
+        marginTop={50}
       />
       <TextComponent
         color={Colors.black}
@@ -24,6 +25,7 @@ const ForgotPasswordComponent = (props) => {
         fontWeight={"300"}
         fontSize={16}
         marginVertical={10}
+             marginTop={20}
       />
       <InputComponent
         icon={props.iconInput}

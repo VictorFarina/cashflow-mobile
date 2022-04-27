@@ -86,6 +86,7 @@ const ForgotScreen = (props) => {
         title='Nueva contraseña'
         inputPlaceholder='Contraseña'
         inputPlaceholder2='Repetir contraseña'
+        inputType='password'
       />
     );
   }
@@ -93,7 +94,7 @@ const ForgotScreen = (props) => {
   return (
     <Pressable style={styles.screen} onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
-        <LogoComponent width={236} height={40} logo={logo} />
+        <LogoComponent width={236} height={40} logo={logo} marginTop={30} />
         {screen}
       </SafeAreaView>
     </Pressable>
