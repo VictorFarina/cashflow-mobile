@@ -1,16 +1,28 @@
 
 const initialState = {
-     authToken:null
+     userToken:null,
+     userData:{},
+     
 };
 
 const userReducer = (state = initialState, action) => {
+
   switch (action.type) {
+
     case "LOGIN":
      
       return {
         ...state, //copy all previuos states
-        authToken:action.payload
+        userToken:action.payload.token,
+       
     }
+
+    case "GET_USER_INVOICES" : 
+    return{
+      ...state,
+       userData: action.payload
+    }
+
    
     default:
       return state;

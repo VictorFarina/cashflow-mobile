@@ -13,6 +13,8 @@ const TextComponent = (props) => {
         fontSize: window.height < 700 ? 20 : props.fontSize ,
         color: props.color,
         fontSize: props.fontSize,
+        fontStyle:props.fontStyle,
+        margin:props.margin ?? 0,
         marginVertical: props.marginVertical ?? 0,
         marginHorizontal: props.marginHorizontal ?? 0,
         marginBottom: props.marginBottom ?? 0,

@@ -7,11 +7,10 @@ import { useSelector } from "react-redux";
 import LoginScreen from "../screens/LoginScreen";
 import ForgotScreen from "../screens/ForgotScreen";
 import SignUpScreen from "../screens/SignUpScreen";
-import DashboardScreen from "../screens/DashboardScreen";
+import InvoicesScreen from "../screens/InvoicesScreen";
 import LogoComponent from "../components/ui/LogoComponent";
 import logo from "../assets/images/../images/cashflow-logo-text.png";
 //constants
-import Colors from "../constants/Colors";
 const Stack = createStackNavigator();
 
 const InitialStack = () => {
@@ -46,36 +45,36 @@ const InitialStack = () => {
 
 const AuthStack = () => {
   return (
-  <Stack.Navigator
-    screenOptions={{
-      headerShown: true,
-      headerTitle: "",
-      headerTintColor: "black",
-      headerTitleStyle: {
-        fontWeight: "bold",
-      },
-    }}>
-    <Stack.Screen
-      name='DashboardScreen'
-      component={DashboardScreen}
-      options={{
-        headerTitle: () => (
-          <LogoComponent logo={logo} width={150} height={25} />
-        ),
-      }}
-    />
-  </Stack.Navigator>
-  )
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: true,
+        headerTitle: "",
+        headerTintColor: "black",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}>
+      <Stack.Screen
+        name='InvoicesScreen'
+        component={InvoicesScreen}
+        options={{
+          headerTitle: () => (
+            <LogoComponent logo={logo} width={150} height={25} />
+          ),
+        }}
+      />
+    </Stack.Navigator>
+  );
 };
 
 const Navigator = () => {
-  const userToken = useSelector((state) => state.userReducer.authToken);
-  console.log(userToken);
+  const userToken = useSelector((state) => state.userReducer.userToken);
+
   return (
-  <NavigationContainer>
-  {userToken  === null ? <InitialStack/>  :  <AuthStack/> }
-  </NavigationContainer>
-  )
+    <NavigationContainer>
+      {userToken === null ? <InitialStack /> : <AuthStack />}
+    </NavigationContainer>
+  );
 };
 
 export default Navigator;
