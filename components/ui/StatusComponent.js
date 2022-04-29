@@ -13,7 +13,7 @@ const StatusComponent = (props) => {
           borderRadius: 50,
           backgroundColor:props.status==='Cerrada' ? "red" : "green",
         }}></View>
-      <TextComponent title={props.status ? props.status : ""} />
+      <TextComponent fontSize={10} color='grey' title={props.status ? props.status : ""} />
     </View>
   );
 };

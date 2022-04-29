@@ -11,9 +11,9 @@ const TextComponent = (props) => {
         textAlign:props.textAlign ?? 'center',
         fontWeight: props.fontWeight ?? 'normal',
         fontSize: window.height < 700 ? 20 : props.fontSize ,
-        color: props.color,
+        color: Colors[props.color],
         fontSize: props.fontSize,
-        fontStyle:props.fontStyle,
+        
         margin:props.margin ?? 0,
         marginVertical: props.marginVertical ?? 0,
         marginHorizontal: props.marginHorizontal ?? 0,

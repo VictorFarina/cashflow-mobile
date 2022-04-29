@@ -15,6 +15,8 @@ import LogoComponent from "../components/ui/LogoComponent";
 import LinkComponent from "../components/ui/LinkComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../store/actions/userActions";
+import Ionicons from "@expo/vector-icons/Ionicons";
+
 
 //Custom hooks
 import useInput from "../hooks/use-input";
@@ -62,7 +64,6 @@ const LoginScreen = ({ navigation }) => {
             height={display.small ? 50 : 70}
             logo={logo}
           />
-          
         </View>
 
         <View

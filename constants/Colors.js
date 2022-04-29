@@ -6,5 +6,6 @@ export default {
     inputIconColor:'#C9CDD4',
     black:'#21374F',
     grey:'#D4D7DD',
+    darkGrey:'#898989',
     validationRed:'#dc3545'
 }

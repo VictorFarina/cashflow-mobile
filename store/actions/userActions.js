@@ -32,7 +32,6 @@ export const loginUser = (email, password) => {
 };
 
 export const getUserInvoices = (token) => {
-
   return async (dispatch) => {
     const res = await fetch("https://v5.cashflow.do/api/v1/invoices", {
       method: "GET",
@@ -41,6 +40,7 @@ export const getUserInvoices = (token) => {
                Authorization: 'Bearer '+token
             }
     });
+    
     const result = await res.json();
 
     if (result.data) {

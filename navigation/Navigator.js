@@ -24,11 +24,19 @@ const InitialStack = () => {
           fontWeight: "bold",
         },
       }}>
+
+        <Stack.Screen
+        name='Home'
+        component={Home}
+        options={{ headerShown: false, headerTitle: "" }}
+      />
+
       <Stack.Screen
         name='Login'
         component={LoginScreen}
         options={{ headerShown: false, headerTitle: "" }}
       />
+    
       <Stack.Screen
         name='SignUp'
         component={SignUpScreen}
